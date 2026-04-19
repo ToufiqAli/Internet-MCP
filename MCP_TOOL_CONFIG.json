@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "server": {
+    "name": "mcp-internet-server",
+    "description": "MCP server providing internet search and URL content access",
+    "version": "1.0.0"
+  },
+  "transport": {
+    "type": "http",
+    "url": "http://localhost:3000"
+  },
+  "tools": [
+    {
+      "name": "smart_search",
+      "description": "Search the internet using Tavily API with caching and fallback to direct URL fetching",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "The search query to execute"
+          },
+          "options": {
+            "type": "object",
+            "properties": {
+              "urls": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Optional URLs to fetch directly"
+              }
+            }
+          }
+        },
+        "required": ["query"]
+      },
+      "returns": {
+        "success": "boolean",
+        "source": "string (cache | tavily | direct_fetch | none)",
+        "data": "array of search results",
+        "cached": "boolean",
+        "timestamp": "string"
+      }
+    },
+    {
+      "name": "fetch_url",
+      "description": "Fetch and extract content from a specific URL",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "The URL to fetch content from"
+          }
+        },
+        "required": ["url"]
+      }
+    }
+  ]
+}

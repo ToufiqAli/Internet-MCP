@@ -1,0 +1,63 @@
+{
+  "mcpServers": {
+    "mcp-internet-server": {
+      "name": "MCP Internet Server",
+      "description": "Production-ready MCP server for internet search and content access",
+      "url": "http://localhost:3000",
+      "tools": [
+        {
+          "name": "smart_search",
+          "description": "Search the internet using Tavily API with intelligent caching and fallback to direct URL fetching",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "query": {
+                "type": "string",
+                "description": "The search query"
+              }
+            },
+            "required": ["query"]
+          },
+          "endpoint": "/tools/smart_search",
+          "method": "POST"
+        },
+        {
+          "name": "fetch_url",
+          "description": "Fetch and extract readable content from a specific URL",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "type": "string",
+                "description": "The URL to fetch content from"
+              }
+            },
+            "required": ["url"]
+          },
+          "endpoint": "/tools/fetch_url",
+          "method": "POST"
+        },
+        {
+          "name": "get_usage",
+          "description": "Get current API usage statistics",
+          "parameters": {
+            "type": "object",
+            "properties": {}
+          },
+          "endpoint": "/tools/usage",
+          "method": "GET"
+        },
+        {
+          "name": "check_health",
+          "description": "Check server health status",
+          "parameters": {
+            "type": "object",
+            "properties": {}
+          },
+          "endpoint": "/health",
+          "method": "GET"
+        }
+      ]
+    }
+  }
+}
